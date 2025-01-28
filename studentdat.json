@@ -1,0 +1,19 @@
+{
+    "students": 
+    {
+        "student1": 
+        {
+            "name": "John Doe",
+            "grade": 4,
+            "email": "John.Doe@Baxter-Academy.org",
+            "requiredStandards": {
+            },
+            "interests": {
+                "Music": 10,
+                "Technology": 7,
+                "Analysis": 4,
+                "Math": 9
+            }
+        }
+    }
+}
