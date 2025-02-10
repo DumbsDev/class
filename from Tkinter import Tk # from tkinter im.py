@@ -30,6 +30,8 @@ def process_file(file_path):
             # remove the everything before the first comma, on each indice
             for i in range(len(file_contents)):
                 file_contents[i] = file_contents[i].split(",", 1)[1]
+                # remove the " from the beginning and end of each string
+                file_contents[i] = file_contents[i].replace("\"", "")
             # add the new list to the file
             for i in range(len(file_contents)):
                 file.write(file_contents[i] + "\n")
@@ -47,14 +49,15 @@ def edit_class(): # this creates/edits a class and writes it to the classdat.jso
     #     json.dump(data, file, indent=4)
     with open('output.txt', 'r+') as file:
         file_content = file.readlines()
+        # clear all things in the class 
     print(file_content)
     print(len(file_content))
     for i in range(len(file_content)):
         with open('classdat.json', 'r+') as file:
             data = json.load(file)
             new_class = {
-                # set the name to everything before the first comma, without the ""
-                "name": file_content[i].split(",", 1)[0]
+                # set the name to everything before the first comma, without the "\""
+                "name": file_content[i].split(",", 1)[0].replace("\"", ""),
                 # "prereqs": input("Enter the prerequisites for the new class: "),
                 # "MinGrade": input("Enter the minimum grade for the new class(0-3, freshman-senior): "),
                 
