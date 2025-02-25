@@ -58,17 +58,42 @@ def edit_class(): # this creates/edits a class and writes it to the classdat.jso
             new_class = {
                 # set the name to everything before the first comma, without the "\""
                 "name": file_content[i].split(",", 1)[0].replace("\"", ""),
-                # "prereqs": input("Enter the prerequisites for the new class: "),
+                "prereqs": input("Enter the prerequisites for the new class: "),
                 # "MinGrade": input("Enter the minimum grade for the new class(0-3, freshman-senior): "),
                 
                 # "Blocks": selectBlocks(),
                 # "Standards": selectStandards(),
                 # "ClassSize": ClassSize(),
-                # "Topics": selectTopics()
+                "Topics": Topics(file_content[i])
             }
             data['classes'].update({new_class['name']: new_class})
             file.seek(0)
             json.dump(data, file, indent=4)
+
+def Topics(file_content):
+    topics_grouping = {
+        "Math": file_content.split(",", 21)[2],
+        "Research": file_content.split(",", 21)[3].replace("\"", ""),
+        "Lab Work": file_content.split(",", 21)[4].replace("\"", ""),
+        "Small Group Work": file_content.split(",", 21)[5].replace("\"", ""),
+        "Whole Class Work": file_content.split(",", 21)[6].replace("\"", ""),
+        "Independent Work": file_content.split(",", 21)[7].replace("\"", ""),
+        "Reading": file_content.split(",", 21)[8].replace("\"", ""),
+        "Writing": file_content.split(",", 21)[9].replace("\"", ""),
+        "Design": file_content.split(",", 21)[10].replace("\"", ""),
+        "Project Work": file_content.split(",", 21)[11].replace("\"", ""),
+        "Tests": file_content.split(",", 21)[12].replace("\"", ""),
+        "Quizzes": file_content.split(",", 21)[13].replace("\"", ""),
+        "Computer Work": file_content.split(",", 21)[14].replace("\"", ""),
+        "Physical and Bio": file_content.split(",", 21)[15].replace("\"", ""),
+        "Art": file_content.split(",", 21)[16].replace("\"", ""),
+        "Music": file_content.split(",", 21)[17].replace("\"", ""),
+        "Tech": file_content.split(",", 21)[18].replace("\"", ""),
+        "College Prep": file_content.split(",", 21)[19].replace("\"", ""),
+        "Computer Science": file_content.split(",", 21)[20].replace("\n", "")
+    }
+
+    return topics_grouping
 
 root = tk.Tk()
 root.title("CSV to JSON Converter")
