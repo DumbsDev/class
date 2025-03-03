@@ -3,7 +3,7 @@ import json
 from tkinter import filedialog
 
 def open_file_dialog():
-    file_path = filedialog.askopenfilename(title="Select a File", filetypes=[("csv", "*.csv*"), ("All files", "*.*")])
+    file_path = filedialog.askopenfilename(title="Select your class file", filetypes=[("csv", "*.csv*"), ("All files", "*.*")])
     if file_path:
         selected_file_label.config(text=f"Selected File:\n{file_path}")
         process_file(file_path)
@@ -58,10 +58,10 @@ def edit_class(): # this creates/edits a class and writes it to the classdat.jso
             new_class = {
                 # set the name to everything before the first comma, without the "\""
                 "name": file_content[i].split(",", 1)[0].replace("\"", ""),
-                "prereqs": input("Enter the prerequisites for the new class: "),
+                # "prereqs": input("Enter the prerequisites for the new class: "),
                 # "MinGrade": input("Enter the minimum grade for the new class(0-3, freshman-senior): "),
                 
-                # "Blocks": selectBlocks(),
+                "Blocks": list(file_content[i].split(",", 2)[1]),
                 # "Standards": selectStandards(),
                 # "ClassSize": ClassSize(),
                 "Topics": Topics(file_content[i])
