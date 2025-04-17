@@ -1,18 +1,128 @@
 {
-    "students": 
-    {
-        "student1": 
-        {
-            "name": "John Doe",
-            "grade": 4,
-            "email": "John.Doe@Baxter-Academy.org",
-            "requiredStandards": {
-            },
-            "interests": {
-                "Music": 10,
-                "Technology": 7,
-                "Analysis": 4,
-                "Math": 9
+    "students": {
+        "Alice Johnson": {
+            "name": "Alice Johnson",
+            "description": "Alice is a creative and curious student who enjoys painting, music, and exploring new design techniques. She has a knack for problem-solving and loves working on group projects.",
+            "Topics": {
+                "Math": "7",
+                "Research": "6",
+                "Lab Work": "5",
+                "Small Group Work": "8",
+                "Whole Class Work": "7",
+                "Independent Work": "5",
+                "Reading": "6",
+                "Writing": "7",
+                "Design": "9",
+                "Project Work": "8",
+                "Tests": "4",
+                "Quizzes": "3",
+                "Computer Work": "6",
+                "Physical and Bio": "5",
+                "Art": "9",
+                "Music": "8",
+                "Tech": "6",
+                "College Prep": "7",
+                "Computer Science": "4"
+            }
+        },
+        "Liam Carter": {
+            "name": "Liam Carter",
+            "description": "Liam is a tech-savvy and analytical thinker with a passion for coding and robotics. He enjoys solving complex problems and exploring new technologies.",
+            "Topics": {
+                "Math": "9",
+                "Research": "8",
+                "Lab Work": "7",
+                "Small Group Work": "5",
+                "Whole Class Work": "4",
+                "Independent Work": "9",
+                "Reading": "6",
+                "Writing": "5",
+                "Design": "4",
+                "Project Work": "7",
+                "Tests": "8",
+                "Quizzes": "7",
+                "Computer Work": "10",
+                "Physical and Bio": "5",
+                "Art": "3",
+                "Music": "4",
+                "Tech": "9",
+                "College Prep": "8",
+                "Computer Science": "10"
+            }
+        },
+        "Sophia Lee": {
+            "name": "Sophia Lee",
+            "description": "Sophia is a bookworm with a love for literature and writing. She enjoys independent research projects and is meticulous in her work.",
+            "Topics": {
+                "Math": "5",
+                "Research": "9",
+                "Lab Work": "4",
+                "Small Group Work": "6",
+                "Whole Class Work": "7",
+                "Independent Work": "10",
+                "Reading": "9",
+                "Writing": "10",
+                "Design": "5",
+                "Project Work": "6",
+                "Tests": "4",
+                "Quizzes": "3",
+                "Computer Work": "5",
+                "Physical and Bio": "4",
+                "Art": "6",
+                "Music": "7",
+                "Tech": "5",
+                "College Prep": "8",
+                "Computer Science": "4"
+            }
+        },
+        "Ethan Rivera": {
+            "name": "Ethan Rivera",
+            "description": "Ethan is an energetic and athletic student who enjoys physical activities and science experiments. He loves working in lab environments and thrives in hands-on projects.",
+            "Topics": {
+                "Math": "6",
+                "Research": "5",
+                "Lab Work": "10",
+                "Small Group Work": "7",
+                "Whole Class Work": "6",
+                "Independent Work": "4",
+                "Reading": "5",
+                "Writing": "4",
+                "Design": "7",
+                "Project Work": "8",
+                "Tests": "7",
+                "Quizzes": "6",
+                "Computer Work": "5",
+                "Physical and Bio": "10",
+                "Art": "4",
+                "Music": "3",
+                "Tech": "6",
+                "College Prep": "7",
+                "Computer Science": "5"
+            }
+        },
+        "Olivia Martinez": {
+            "name": "Olivia Martinez",
+            "description": "Olivia is a detail-oriented and methodical student with a strong interest in math and science. She enjoys structured learning environments and excels in tests.",
+            "Topics": {
+                "Math": "10",
+                "Research": "7",
+                "Lab Work": "8",
+                "Small Group Work": "5",
+                "Whole Class Work": "4",
+                "Independent Work": "6",
+                "Reading": "7",
+                "Writing": "5",
+                "Design": "4",
+                "Project Work": "6",
+                "Tests": "10",
+                "Quizzes": "9",
+                "Computer Work": "8",
+                "Physical and Bio": "7",
+                "Art": "3",
+                "Music": "4",
+                "Tech": "9",
+                "College Prep": "10",
+                "Computer Science": "8"
             }
         }
     }
