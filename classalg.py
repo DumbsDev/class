@@ -96,5 +96,8 @@ for i in range(len(getLenList("student"))):
     print("o:", order)  # Print current state of order list
 # combine it, so each indice is a tuple of (student name, class weightings)
 order = [(order[i], order[i+1:i+len(getLenList("class"))+1]) for i in range(0, len(order), len(getLenList("class")) + 1)]
+print
 print("printed order:", order[1][1][1])
-for in range(len)
+for i in range(len(order[i])):
+    # fill in later
+    pass
