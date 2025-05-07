@@ -1,6 +1,7 @@
 import json
 import csv
 from colorama import Fore, Back, Style  # For colored terminal output
+import copy
 
 order = []  # Stores computed class weightings per student
 
@@ -38,6 +39,7 @@ def class_weighting(cl, st):
         student_value = int(st[i])  # Get corresponding student topic value
         score.append(abs(topic_value - student_value))  # Calculate and store absolute difference
 
+    print("score:", score)  # Print the score for debugging
     return score  # Returns list of differences
 
 # Gets a specific topic value for a given class and topic index
@@ -96,8 +98,22 @@ for i in range(len(getLenList("student"))):
     print("o:", order)  # Print current state of order list
 # combine it, so each indice is a tuple of (student name, class weightings)
 order = [(order[i], order[i+1:i+len(getLenList("class"))+1]) for i in range(0, len(order), len(getLenList("class")) + 1)]
-print
 print("printed order:", order[1][1][1])
-for i in range(len(order[i])):
-    # fill in later
-    pass
+orderWeighted = [] #will store the weighted order of students
+
+#add all the class weightings together for each student, so its a list of single numbers, and a student name
+for i in range(len(order)):
+    for j in range(len(order[i][1])):
+        order[i][1][j] = sum(order[i][1][j])
+        print("sadd", order[i][1][j], "\n")
+    
+orderWeighted = copy.deepcopy(order) # Append student name and their class weightings
+# sort the orderWeighted list by the class weightings, lowest number to highest
+for i in range(len(order)):
+    orderWeighted[i][1].sort()
+
+print(order)
+print("\n")
+print(orderWeighted)
+
+print(order == orderWeighted)  # Print final ordered list of students and their class weightings
