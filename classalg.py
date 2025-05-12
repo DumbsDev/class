@@ -26,7 +26,7 @@ def getStudent():
         for student_name in data['students'].keys():
             topics = list(data["students"][student_name]["Topics"].values())  # Get topic values
             student_topics.append(topics)  # Add to student topics list
-            print(student_name, ":", topics)  # Display student's topic values
+            # print(student_name, ":", topics)  # Display student's topic values
         return student_topics  # Returns list of lists (one list per student)
 
 # Calculates the absolute difference between a class's topic values and a student's topic values
@@ -39,7 +39,7 @@ def class_weighting(cl, st):
         student_value = int(st[i])  # Get corresponding student topic value
         score.append(abs(topic_value - student_value))  # Calculate and store absolute difference
 
-    print("score:", score)  # Print the score for debugging
+    # print("score:", score)  # Print the score for debugging
     return score  # Returns list of differences
 
 # Gets a specific topic value for a given class and topic index
@@ -82,38 +82,34 @@ def getStudentNameByIndex(index):
 
 # MAIN EXECUTION
 
-# Print first class's topic dictionary
-print("\nGET CLASS LIST:", getDataByIndex(0, "topics"))
+# print("\nGET CLASS LIST:", getDataByIndex(0, "topics"))
 
-student_order = []  # Will store the ordering or matching results
+class_names = list(getLenList("class").keys())
+student_data = getLenList("student")
+student_topics_list = getStudent()  # Load once
 
-# Loop through each student
-for i in range(len(getLenList("student"))):
-    # add students name
-    order.append(getStudentNameByIndex(i))
-    # Loop through each class
-    for j in range(len(getLenList("class"))):
-        # Calculate weighting score for this student-class pair
-        order.append(class_weighting(j, getStudent()[i]))
-    print("o:", order)  # Print current state of order list
-# combine it, so each indice is a tuple of (student name, class weightings)
-order = [(order[i], order[i+1:i+len(getLenList("class"))+1]) for i in range(0, len(order), len(getLenList("class")) + 1)]
-print("printed order:", order[1][1][1])
-orderWeighted = [] #will store the weighted order of students
+order = []  # (student name, list of (class, score))
 
-#add all the class weightings together for each student, so its a list of single numbers, and a student name
-for i in range(len(order)):
-    for j in range(len(order[i][1])):
-        order[i][1][j] = sum(order[i][1][j])
-        print("sadd", order[i][1][j], "\n")
-    
-orderWeighted = copy.deepcopy(order) # Append student name and their class weightings
-# sort the orderWeighted list by the class weightings, lowest number to highest
-for i in range(len(order)):
-    orderWeighted[i][1].sort()
+for i, student_name in enumerate(student_data.keys()):
+    student_topics = student_topics_list[i]
+    class_scores = []
 
-print(order)
-print("\n")
-print(orderWeighted)
+    for j, class_name in enumerate(class_names):
+        score = sum(class_weighting(j, student_topics))  # total weighting score
+        class_scores.append((class_name, score))
 
-print(order == orderWeighted)  # Print final ordered list of students and their class weightings
+    # Sort class_scores from lowest (best match) to highest
+    class_scores.sort(key=lambda x: x[1])
+
+    order.append((student_name, class_scores))
+
+# Print results nicely
+print("\nORDERED CLASS MATCHES PER STUDENT (Best to Worst):\n")
+for student_name, class_scores in order:
+    print(f"{student_name}:")
+    for class_name, score in class_scores:
+        print(f"  {class_name}: {score}")
+    print()
+
+# create a student object, which assigns the student their top 5 classes.
+student_objects = []  # List to hold student objects

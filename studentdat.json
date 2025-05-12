@@ -1,8 +1,8 @@
 {
     "students": {
-        "Alice Johnson": {
-            "name": "Alice Johnson",
-            "description": "Alice is a creative and curious student who enjoys painting, music, and exploring new design techniques. She has a knack for problem-solving and loves working on group projects.",
+        "Ra Mirez": {
+            "name": "Ra Mirez",
+            "description": "Ra Mirez is a creative and curious student who enjoys painting, music, and exploring new design techniques. She has a knack for problem-solving and loves working on group projects.",
             "Topics": {
                 "Math": "7",
                 "Research": "6",
@@ -25,9 +25,9 @@
                 "Computer Science": "4"
             }
         },
-        "Liam Carter": {
-            "name": "Liam Carter",
-            "description": "Liam is a tech-savvy and analytical thinker with a passion for coding and robotics. He enjoys solving complex problems and exploring new technologies.",
+        "Chadivius Skinkledop": {
+            "name": "Chadivius Skinkledop",
+            "description": "Cha is a tech-savvy and analytical thinker with a passion for coding and robotics. He enjoys solving complex problems and exploring new technologies.",
             "Topics": {
                 "Math": "9",
                 "Research": "8",
@@ -50,9 +50,9 @@
                 "Computer Science": "10"
             }
         },
-        "Sophia Lee": {
-            "name": "Sophia Lee",
-            "description": "Sophia is a bookworm with a love for literature and writing. She enjoys independent research projects and is meticulous in her work.",
+        "Zeke Bongolia": {
+            "name": "Zeke Bongolian",
+            "description": "Ms. Bongolian is a bookworm with a love for literature and writing. She enjoys independent research projects and is meticulous in her work.",
             "Topics": {
                 "Math": "5",
                 "Research": "9",
@@ -75,9 +75,9 @@
                 "Computer Science": "4"
             }
         },
-        "Ethan Rivera": {
-            "name": "Ethan Rivera",
-            "description": "Ethan is an energetic and athletic student who enjoys physical activities and science experiments. He loves working in lab environments and thrives in hands-on projects.",
+        "Elizameth Martin": {
+            "name": "Elizameth Martinslong",
+            "description": "Meth is an energetic and athletic student who enjoys physical activities and science experiments. He loves working in lab environments and thrives in hands-on projects.",
             "Topics": {
                 "Math": "6",
                 "Research": "5",
@@ -100,9 +100,9 @@
                 "Computer Science": "5"
             }
         },
-        "Olivia Martinez": {
-            "name": "Olivia Martinez",
-            "description": "Olivia is a detail-oriented and methodical student with a strong interest in math and science. She enjoys structured learning environments and excels in tests.",
+        "Squip Martens": {
+            "name": "Squip Martenshlong",
+            "description": "Squiptavialjonsquarlosos (or Squip for short) is a detail-oriented and methodical student with a strong interest in math and science. She enjoys structured learning environments and excels in tests.",
             "Topics": {
                 "Math": "10",
                 "Research": "7",
@@ -123,6 +123,31 @@
                 "Tech": "9",
                 "College Prep": "10",
                 "Computer Science": "8"
+            }
+        },
+        "Shtitzel Miosis the Mongolian Throat Singer": {
+            "name": "Shtitzel Miosis the Mongolian Throat Singer",
+            "description": "he sing",
+            "Topics": {
+                "Math": "2",
+                "Research": "4",
+                "Lab Work": "3",
+                "Small Group Work": "7",
+                "Whole Class Work": "10",
+                "Independent Work": "8",
+                "Reading": "5",
+                "Writing": "2",
+                "Design": "5",
+                "Project Work": "3",
+                "Tests": "1",
+                "Quizzes": "1",
+                "Computer Work": "1",
+                "Physical and Bio": "2",
+                "Art": "1",
+                "Music": "10",
+                "Tech": "2",
+                "College Prep": "1",
+                "Computer Science": "1"
             }
         }
     }

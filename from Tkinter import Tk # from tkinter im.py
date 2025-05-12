@@ -106,6 +106,7 @@ selected_file_label.pack()
 
 file_text = tk.Text(root, wrap=tk.WORD, height=10, width=40)
 file_text.pack(padx=20, pady=20)
+
 # set icon
 root.iconbitmap("")
 
