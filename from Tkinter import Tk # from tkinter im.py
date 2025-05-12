@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 from tkinter import filedialog
+import subprocess
 
 def open_file_dialog():
     file_path = filedialog.askopenfilename(title="Select your class file", filetypes=[("csv", "*.csv*"), ("All files", "*.*")])
@@ -35,6 +36,15 @@ def process_file(file_path):
             # add the new list to the file
             for i in range(len(file_contents)):
                 file.write(file_contents[i] + "\n")
+
+            # # add a button to process the data, and run the classalg script
+            # process_button = tk.Button(root, text="Process Data")
+            # process_button.pack(padx=20, pady=20)
+            # process_button.config(state=tk.NORMAL)
+            # #run the classalg python file after the button is pressed
+            # # import subprocess
+            # print("data:", subprocess.run(["python", "classalg.py"]))
+
             
 
     except Exception as e:
