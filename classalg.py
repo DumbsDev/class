@@ -81,6 +81,21 @@ def getStudentNameByIndex(index):
         return "Index out of range"
 
 # MAIN EXECUTION
+class Student:
+    def __init__(self, name, class_scores):
+        self.name = name
+        self.class_scores = sorted(class_scores, key=lambda x: x[1])  # Sort on init
+
+    def get_top_classes(self, count=5):
+        return self.class_scores[:count]
+
+    def __str__(self):
+        top_classes = self.get_top_classes()
+        result = f"{self.name}'s Top {len(top_classes)} Classes:\n"
+        for class_name, score in top_classes:
+            result += f"  {class_name}: {score}\n"
+        return result
+
 
 # print("\nGET CLASS LIST:", getDataByIndex(0, "topics"))
 
@@ -113,3 +128,9 @@ for student_name, class_scores in order:
 
 # create a student object, which assigns the student their top 5 classes.
 student_objects = []  # List to hold student objects
+
+# FINAL STUDENT OBJECT CREATION & TOP 5 CLASSES DISPLAY
+print("\nTOP 5 CLASS MATCHES PER STUDENT:\n")
+for student_name, class_scores in order:
+    student = Student(student_name, class_scores)
+    print(student)
