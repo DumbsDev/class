@@ -1,123 +1,150 @@
 import tkinter as tk
-import json
-from tkinter import filedialog
+from tkinter import filedialog, messagebox, ttk
 import subprocess
+import os
+import classalg  # Ensure this is in the same directory
 
+# --- Setup Main Window ---
+root = tk.Tk()
+root.title("Class CSV Processor")
+root.geometry("1000x600")
+root.resizable(False, False)
+
+dark_mode_enabled = False
+
+# --- Toggle Dark Mode ---
+def toggle_dark_mode():
+    global dark_mode_enabled
+    dark_mode_enabled = not dark_mode_enabled
+
+    if dark_mode_enabled:
+        colors = {
+            "bg": "#2E2E2E", "fg": "#FFFFFF", "button_bg": "#444", "button_fg": "#FFF",
+            "entry_bg": "#1E1E1E", "tree_bg": "#1E1E1E", "tree_fg": "#FFFFFF", "highlight": "#444444"
+        }
+    else:
+        colors = {
+            "bg": "#F0F0F0", "fg": "#000000", "button_bg": "#FFF", "button_fg": "#000",
+            "entry_bg": "#FFFFFF", "tree_bg": "#FFFFFF", "tree_fg": "#000000", "highlight": "#DDDDDD"
+        }
+
+    root.config(bg=colors["bg"])
+    frame_top.config(bg=colors["bg"])
+    selected_file_label.config(bg=colors["bg"], fg=colors["fg"])
+    status_label.config(bg=colors["bg"], fg=colors["fg"])
+    open_button.config(bg=colors["button_bg"], fg=colors["button_fg"])
+    process_button.config(bg=colors["button_bg"], fg=colors["button_fg"])
+    dark_mode_button.config(bg=colors["button_bg"], fg=colors["button_fg"])
+    for child in tree.get_children():
+        tree.item(child, tags=("row",))
+    style = ttk.Style()
+    style.theme_use('default')
+    style.configure("Treeview", background=colors["tree_bg"], foreground=colors["tree_fg"], fieldbackground=colors["tree_bg"])
+    style.map("Treeview", background=[("selected", colors["highlight"])])
+
+# --- Load CSV ---
 def open_file_dialog():
-    file_path = filedialog.askopenfilename(title="Select your class file", filetypes=[("csv", "*.csv*"), ("All files", "*.*")])
+    file_path = filedialog.askopenfilename(
+        title="Select your class file",
+        filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
+    )
     if file_path:
-        selected_file_label.config(text=f"Selected File:\n{file_path}")
-        process_file(file_path)
-        edit_class()
-
+        selected_file_label.config(text=f"Selected File:\n{os.path.basename(file_path)}")
+        try:
+            process_file(file_path)
+            status_label.config(text="✅ File processed.", fg="green")
+        except Exception as e:
+            status_label.config(text=f"❌ Error: {str(e)}", fg="red")
 
 def process_file(file_path):
+    with open(file_path, 'r') as f:
+        lines = f.read().splitlines()
+    if not lines:
+        raise Exception("Empty file.")
+    data = [line.split(",", 1)[1].replace('"', '') for line in lines[1:] if "," in line]
+    with open("output.txt", "w") as out:
+        out.write("\n".join(data))
+
+# --- Run classalg and Parse Output ---
+def run_algorithm():
     try:
-        with open(file_path, 'r+') as file:
-            file_contents = file.read()
-            file_text.delete(1.0, tk.END)
-            temp_file_name = file_path.split("/")[-1]
-            # the 3 lines above delete the text in the text box and then add the file name to the text box
-
-            file_text.insert(tk.END, "File \"" + temp_file_name + "\" successfully read.")
-
-        with open('output.txt', 'r+') as file:
-            # clear the file contents
-            file.truncate(0)
-            # remove the first line
-            file_contents = file_contents.split("\n", 1)[1]
-            # split each line into a list of strings
-            file_contents = file_contents.split("\n")
-            # remove the everything before the first comma, on each indice
-            for i in range(len(file_contents)):
-                file_contents[i] = file_contents[i].split(",", 1)[1]
-                # remove the " from the beginning and end of each string
-                file_contents[i] = file_contents[i].replace("\"", "")
-            # add the new list to the file
-            for i in range(len(file_contents)):
-                file.write(file_contents[i] + "\n")
-
-            # # add a button to process the data, and run the classalg script
-            # process_button = tk.Button(root, text="Process Data")
-            # process_button.pack(padx=20, pady=20)
-            # process_button.config(state=tk.NORMAL)
-            # #run the classalg python file after the button is pressed
-            # # import subprocess
-            # print("data:", subprocess.run(["python", "classalg.py"]))
-
-            
-
+        result = subprocess.run(["python", "classalg.py"], capture_output=True, text=True)
+        output = result.stdout.strip()
+        if not output:
+            output = result.stderr.strip()
+        if not output:
+            raise Exception("classalg.py produced no output.")
+        display_table(output)
+        status_label.config(text="✅ Algorithm executed and table updated.", fg="green")
     except Exception as e:
-        selected_file_label.config(text=f"Error: {str(e)}")
+        status_label.config(text=f"❌ Failed: {str(e)}", fg="red")
 
-def edit_class(): # this creates/edits a class and writes it to the classdat.json file
-    # with open('classdat.json', 'r+') as file:
-    #     # remove everything except " { "classes": { } } "
-    #     data = json.loadile)
-    #     data = {"classes": {}}
-    #     file.seek(0)
-    #     json.dump(data, file, indent=4)
-    with open('output.txt', 'r+') as file:
-        file_content = file.readlines()
-        # clear all things in the class 
-    print(file_content)
-    print(len(file_content))
-    for i in range(len(file_content)):
-        with open('classdat.json', 'r+') as file:
-            data = json.load(file)
-            new_class = {
-                # set the name to everything before the first comma, without the "\""
-                "name": file_content[i].split(",", 1)[0].replace("\"", ""),
-                # "prereqs": input("Enter the prerequisites for the new class: "),
-                # "MinGrade": input("Enter the minimum grade for the new class(0-3, freshman-senior): "),
-                
-                "Blocks": list(file_content[i].split(",", 2)[1]),
-                # "Standards": selectStandards(),
-                # "ClassSize": ClassSize(),
-                "Topics": Topics(file_content[i])
-            }
-            data['classes'].update({new_class['name']: new_class})
-            file.seek(0)
-            json.dump(data, file, indent=4)
+# --- Parse Output and Populate Treeview Table ---
+def display_table(output):
+    for row in tree.get_children():
+        tree.delete(row)
 
-def Topics(file_content):
-    topics_grouping = {
-        "Math": file_content.split(",", 21)[2],
-        "Research": file_content.split(",", 21)[3].replace("\"", ""),
-        "Lab Work": file_content.split(",", 21)[4].replace("\"", ""),
-        "Small Group Work": file_content.split(",", 21)[5].replace("\"", ""),
-        "Whole Class Work": file_content.split(",", 21)[6].replace("\"", ""),
-        "Independent Work": file_content.split(",", 21)[7].replace("\"", ""),
-        "Reading": file_content.split(",", 21)[8].replace("\"", ""),
-        "Writing": file_content.split(",", 21)[9].replace("\"", ""),
-        "Design": file_content.split(",", 21)[10].replace("\"", ""),
-        "Project Work": file_content.split(",", 21)[11].replace("\"", ""),
-        "Tests": file_content.split(",", 21)[12].replace("\"", ""),
-        "Quizzes": file_content.split(",", 21)[13].replace("\"", ""),
-        "Computer Work": file_content.split(",", 21)[14].replace("\"", ""),
-        "Physical and Bio": file_content.split(",", 21)[15].replace("\"", ""),
-        "Art": file_content.split(",", 21)[16].replace("\"", ""),
-        "Music": file_content.split(",", 21)[17].replace("\"", ""),
-        "Tech": file_content.split(",", 21)[18].replace("\"", ""),
-        "College Prep": file_content.split(",", 21)[19].replace("\"", ""),
-        "Computer Science": file_content.split(",", 21)[20].replace("\n", "")
-    }
+    lines = output.strip().splitlines()
+    for line in lines:
+        if ':' not in line:
+            continue
+        name, class_str = line.split(":", 1)
+        classes = class_str.strip().split(", ")
+        class_dict = {}
+        for cls in classes:
+            if "(Block" in cls:
+                try:
+                    title, block_info = cls.rsplit(" (Block ", 1)
+                    block_num = int(block_info.strip(")"))
+                    class_dict[block_num] = title
+                except ValueError:
+                    continue
+        ordered_classes = [class_dict.get(i, "") for i in range(1, 6)]
+        tree.insert("", "end", values=[name.strip()] + ordered_classes)
 
-    return topics_grouping
+# --- UI Layout ---
+frame_top = tk.Frame(root)
+frame_top.pack(pady=10)
 
-root = tk.Tk()
-root.title("CSV to JSON Converter")
+dark_mode_button = tk.Button(frame_top, text="🌙 Dark Mode", width=12, command=toggle_dark_mode)
+dark_mode_button.grid(row=0, column=0, padx=5)
 
-open_button = tk.Button(root, text="Open File", command=open_file_dialog)
-open_button.pack(padx=20, pady=20)
+open_button = tk.Button(frame_top, text="📂 Open CSV", width=20, command=open_file_dialog)
+open_button.grid(row=0, column=1, padx=10)
 
-selected_file_label = tk.Label(root, text="Selected File:\n")
+process_button = tk.Button(frame_top, text="⚙️ Run Algorithm", width=20, command=run_algorithm)
+process_button.grid(row=0, column=2, padx=10)
+
+selected_file_label = tk.Label(root, text="No file selected.", font=("Arial", 10))
 selected_file_label.pack()
 
-file_text = tk.Text(root, wrap=tk.WORD, height=10, width=40)
-file_text.pack(padx=20, pady=20)
+# --- Treeview Table ---
+columns = ["Student", "Block 1", "Block 2", "Block 3", "Block 4", "Block 5"]
+tree_frame = tk.Frame(root)
+tree_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-# set icon
-root.iconbitmap("")
+x_scroll = tk.Scrollbar(tree_frame, orient="horizontal")
+x_scroll.pack(side="bottom", fill="x")
 
+y_scroll = tk.Scrollbar(tree_frame, orient="vertical")
+y_scroll.pack(side="right", fill="y")
+
+tree = ttk.Treeview(tree_frame, columns=columns, show="headings", xscrollcommand=x_scroll.set, yscrollcommand=y_scroll.set)
+tree.pack(fill=tk.BOTH, expand=True)
+
+x_scroll.config(command=tree.xview)
+y_scroll.config(command=tree.yview)
+
+for col in columns:
+    tree.heading(col, text=col)
+    tree.column(col, width=180, anchor="w")
+
+status_label = tk.Label(root, text="", font=("Arial", 10, "italic"))
+status_label.pack()
+
+# --- Start Light Mode ---
+toggle_dark_mode()  # flip to dark
+toggle_dark_mode()  # flip back to light (default)
+
+# --- Start Application ---
 root.mainloop()
