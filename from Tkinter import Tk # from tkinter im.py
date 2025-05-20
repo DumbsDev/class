@@ -20,12 +20,14 @@ def toggle_dark_mode():
     if dark_mode_enabled:
         colors = {
             "bg": "#2E2E2E", "fg": "#FFFFFF", "button_bg": "#444", "button_fg": "#FFF",
-            "entry_bg": "#1E1E1E", "tree_bg": "#1E1E1E", "tree_fg": "#FFFFFF", "highlight": "#444444"
+            "entry_bg": "#1E1E1E", "tree_bg": "#1E1E1E", "tree_fg": "#FFFFFF", "highlight": "#101445"
+            
         }
     else:
         colors = {
             "bg": "#F0F0F0", "fg": "#000000", "button_bg": "#FFF", "button_fg": "#000",
-            "entry_bg": "#FFFFFF", "tree_bg": "#FFFFFF", "tree_fg": "#000000", "highlight": "#DDDDDD"
+            "entry_bg": "#FFFFFF", "tree_bg": "#FFFFFF", "tree_fg": "#000000", "highlight": "#7777FF"
+            
         }
 
     root.config(bg=colors["bg"])
@@ -41,6 +43,9 @@ def toggle_dark_mode():
     style.theme_use('default')
     style.configure("Treeview", background=colors["tree_bg"], foreground=colors["tree_fg"], fieldbackground=colors["tree_bg"])
     style.map("Treeview", background=[("selected", colors["highlight"])])
+    style.configure("Treeview.Heading", background=colors["bg"], foreground=colors["fg"])
+    style.map("Treeview.Heading", background=[("active", colors["highlight"])])
+    style.configure("TScrollbar", background=colors["bg"], troughcolor=colors["bg"])
 
 # --- Load CSV ---
 def open_file_dialog():

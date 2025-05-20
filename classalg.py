@@ -58,5 +58,13 @@ def classalg():
         else:
             print(f"{student_name}: No classes assigned.")
 
+        # print all the options for "Shtitzel misos the mongolian throat singer" and their scores
+        # if student_name == "Shtitzel Miosis the Mongolian Throat Singer":
+        #     print(f"Options for {student_name}:")
+        #     for class_name, score in sorted_scores:
+        #         class_topics = class_data[class_name]["Topics"]
+        #         schedule_str = ', '.join([f"{cls} (Block {blk})" for cls, blk in assign_classes_to_student([(class_name, score)], class_block_map)])
+        #         print(f"{class_name}: {schedule_str} (Score: {score})")
+
 # Call the function
 classalg()
