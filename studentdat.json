@@ -2524,6 +2524,30 @@
         "College Preparation": 7,
         "Computer Science": 1
       }
+    },"Liam Langan": {
+      "name": "Liam Langan",
+      "description": "Ra Mirez is a creative and curious student who enjoys painting, music, and exploring new design techniques. She has a knack for problem-solving and loves working on group projects.",
+      "Topics": {
+        "Math": 8,
+        "Research": 6,
+        "Lab Work": 7,
+        "Small Group Work": 5,
+        "Whole Class Work": 7,
+        "Independent Work": 3,
+        "Reading": 4,
+        "Writing": 3,
+        "Design": 3,
+        "Project Work": 10,
+        "Tests": 9,
+        "Quizzes": 1,
+        "Computer Work": 10,
+        "Physical and Biological Science": 6,
+        "Art": 2,
+        "Music": 7,
+        "Technology": 1,
+        "College Preparation": 8,
+        "Computer Science": 10
+      }
     }
   }
 }
